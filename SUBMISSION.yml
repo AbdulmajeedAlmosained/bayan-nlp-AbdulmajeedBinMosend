@@ -1,7 +1,7 @@
-course: bayan-applied-nlp
-student_github: YOUR_USERNAME
-repository: https://github.com/YOUR_USERNAME/bayan-nlp-YOUR_USERNAME
-default_branch: main
-final_tag: submission-v1.0
-runtime: google-colab
-visibility: public
+course: "Bayan Applied NLP"
+student_github: "AbdulmajeedAlmosained"
+repository: "https://github.com/AbdulmajeedAlmosained/bayan-nlp-AbdulmajeedBinMosend"
+default_branch: "main"
+final_tag: "submission-v1.0"
+runtime: "google-colab"
+visibility: "public"
