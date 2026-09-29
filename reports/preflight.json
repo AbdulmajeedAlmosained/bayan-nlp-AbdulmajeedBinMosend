@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "policy": "BAYAN-100-v2.1",
+  "reviewed_commit": "b501005832de9ada0fb8c3a68e5b918decb77713",
+  "executed_code_cells": 108,
+  "notebook_sha256": {
+    "00_runtime_doctor.ipynb": "f2b16a8ab0fd48aaaae2d883405457ee28249a276d72f058a8a9d9a975e6c809",
+    "01_text_processing_tokenization.ipynb": "e0477001c6b83d7d0b24cb8e2f48d4ab652c2019d5942311eb04f90629428af8",
+    "02_attention_transformers.ipynb": "6e14695f93d07f107a7838980a9bfd22885f4578e76c4a259d699ef603823789",
+    "03_text_classification.ipynb": "2e8f206936a1f82ab471eb9f594d860a11f7e9df70e3dd9f1738b29cf106b2a5",
+    "04_ner_and_qa.ipynb": "910837db2c56ae62406a7cf9632b481e7aba4c17717a8ab30f8b9f9944c1bc7a",
+    "05_arabic_nlp.ipynb": "ccc9cae68afa3f657e0dd202f1682446b2762f2c89f227227226e770aa46f9d5",
+    "06_semantic_search.ipynb": "60c5ef125820f84fdd1bcbc496051e853e72bb271fdc845c3ca5cdea3add6ca0",
+    "07_evaluation_error_analysis.ipynb": "1c87d8a42f6b88e2ff1f8668f122276022f4e473f2600a96a5f12a3b190f98b1",
+    "08_optimization_serving.ipynb": "4a513823fc952a6588831f7d89f3231a76a9c485f784eebe648b241af7d28575"
+  },
+  "checks": [
+    "Required project structure",
+    "Nine valid notebooks and Core markers",
+    "PROJECT_SUMMARY.json contract",
+    "SUBMISSION.yml contract",
+    "No forbidden or oversized tracked artefacts",
+    "Checked notebook code cells, saved output markers and errors; did not execute ML"
+  ],
+  "errors": [],
+  "warnings": [
+    "Run again with --require-tag after creating submission-v1.0.",
+    "Open the repository and Colab links in a private browser window; visibility is not verifiable offline.",
+    "Authorship, scientific accuracy, privacy inside arbitrary text and public access require human review.",
+    "PASS is not a grade, an automatic plagiarism verdict or certification."
+  ]
+}
