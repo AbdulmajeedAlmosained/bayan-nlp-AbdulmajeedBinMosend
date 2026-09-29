@@ -1,29 +1,24 @@
-# PRESENTATION — Bayan | عرض بيان
+# Presentation Plan (10 slides, 5-7 minutes)
 
-**GitHub username / معرف المتدرب:** FILL_ME
+1. **Title** — Bayan: bilingual NLP over Saudi government-services text. Name + repo link.
+2. **Problem & data** — ar/en user requests across 4 service topics; small synthetic fixture,
+   honest about its size; show one Arabic + one English example.
+3. **Text → numbers (Day 1)** — two-copy preprocessing contract, PII masking demo before/after,
+   why tokenizer choice matters (fertility + truncation numbers).
+4. **Attention in 60 seconds** — my NumPy scaled dot-product attention; one real attention
+   heatmap from the pretrained model; the 1/√d_k scaling effect on entropy.
+5. **Classification (Day 2)** — DistilBERT fine-tune vs TF-IDF baseline; macro-F1 delta; split
+   isolation (why group leakage would inflate scores).
+6. **NER & QA (Day 2)** — BIO alignment with -100; strict boundary F1; the honest no-answer QA
+   demo (question whose answer is not in the context).
+7. **Arabic day (Day 3)** — the CAMeL "search" profile with golden-case table; Gulf frozen-slice
+   comparison of two checkpoints; live demo: messy Gulf input → clean retrieval.
+8. **Search + reranker trade-off (Day 3)** — recall@3/MRR@3 before vs after reranking, with
+   median/p95 latency; why we adopted or rejected the reranker based on measurement.
+9. **Optimization & serving (Day 4)** — ONNX FP32 → INT8, parity checks (prediction agreement =
+   100%), budget table, FastAPI `/health` + `/v1/classify` with canaries and contract tests.
+10. **Honesty & next steps** — every number is MEASURED_SMOKE; error taxonomy top-3 fixes;
+    one measured extension idea. Closing with the repo link and the validator PASS line.
 
-## 1. Problem and user | المشكلة والمستخدم
-FILL_ME: user, input, scope and non-goals / المستخدم والمدخل والنطاق والحدود.
-
-## 2. Architecture | المعمارية
-FILL_ME: link to your README architecture and explain data flow / رابط المعمارية وتدفق البيانات.
-
-## 3. Demonstration | التطبيق
-- Arabic example + output evidence: FILL_ME
-- English example + output evidence: FILL_ME
-- No-answer / invalid-input case: FILL_ME
-- Saved fallback from the same submission, if available: FILL_ME
-
-## 4. Measured evidence | الدليل المقاس
-- Quality metric, data split and report: FILL_ME
-- Performance metric, environment and report: FILL_ME
-- Measurement label and limits: FILL_ME
-
-## 5. Decision and ownership | القرار والمساهمة
-- My change / measured extension and file: FILL_ME
-- Baseline, benefit/cost and limitation: FILL_ME
-- One code decision I can explain: FILL_ME
-
-The talk is five minutes plus two minutes of individual verification; up to five slides or equivalent. Presentation credit is 10 within the total of 100. Optional slides may be linked here; no paid tool is required.
-
-العرض خمس دقائق ودقيقتان للتحقق الفردي، بخمس شرائح كحد أقصى أو ما يعادلها. درجة العرض 10 ضمن المجموع 100. يمكن ربط شرائح اختيارية هنا؛ لا تحتاج أداة مدفوعة.
+**Demo fallback:** all notebooks are committed with outputs, so every number can be shown
+from the repo even if live inference is not possible in the room.
