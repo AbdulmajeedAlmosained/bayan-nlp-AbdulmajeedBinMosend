@@ -42,7 +42,7 @@
         "permit",
         "transport"
       ],
-      "elapsed_seconds": 14.03
+      "elapsed_seconds": 45.83
     },
     {
       "model_id": "CAMeL-Lab/bert-base-arabic-camelbert-da",
@@ -58,7 +58,7 @@
         "health",
         "permit"
       ],
-      "elapsed_seconds": 14.82
+      "elapsed_seconds": 60.38
     }
   ],
   "limitations": [

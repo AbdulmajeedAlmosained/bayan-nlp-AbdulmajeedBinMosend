@@ -1,17 +1,17 @@
-# BENCHMARKS draft — SYSTEMS_SMOKE
+# BENCHMARKS draft — PROJECT_ARTIFACT
 
-- Result label: `SYSTEMS_SMOKE`
-- Decision scope: `SYSTEMS_SMOKE_NOT_A_SHIP_DECISION`
-- Workload SHA-256: `1d1d1c3bef8a582931f6a1c1803671e8fe194fc36ae59cdc4f4feca9fc4d6785`
+- Result label: `MEASURED`
+- Decision scope: `PROJECT_BUDGET_DECISION`
+- Workload SHA-256: `9b07010d0e607282b66a0a1b1096175fd6015a237577db26bf03366393e077d8`
 - Device/provider: `cpu` / `CPUExecutionProvider`
 - Warm-up/repetitions: 5/30
 - Memory method: process RSS start and observed peak; approximate
-- PyTorch p95: 78.621 ms
-- ONNX FP32 p95: 21.982 ms
+- PyTorch p95: 233.966 ms
+- ONNX FP32 p95: 242.410 ms
 - ONNX FP32 quality tax: 0.000000
 - INT8 available: True
-- Selected for service: `onnx-dynamic-int8`
+- Selected for service: `onnx-fp32`
 
-- Adoption decision: `ADOPT_INT8`
+- Adoption decision: `ADOPT_ONNX_FP32`
 
 > Replace this smoke draft with the complete BENCHMARKS template and full project workload before Gate D.

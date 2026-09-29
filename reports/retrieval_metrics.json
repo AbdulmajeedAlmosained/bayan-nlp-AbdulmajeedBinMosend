@@ -52,8 +52,8 @@
     "mrr_at_3_before": 0.6666666666666666,
     "mrr_at_3_after": 0.7222222222222223,
     "mrr_at_3_delta": 0.05555555555555569,
-    "median_rerank_ms": 190.89771650010334,
-    "p95_rerank_ms": 195.53828475000046,
+    "median_rerank_ms": 1241.5256665000243,
+    "p95_rerank_ms": 1809.0430639999795,
     "warmup_excluded": true,
     "decision": "ADOPT_FOR_EXPERIMENT",
     "limitations": [
