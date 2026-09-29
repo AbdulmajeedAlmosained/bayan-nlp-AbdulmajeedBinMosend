@@ -1,152 +1,74 @@
-# Bayan — Bilingual Applied NLP Project
+# Bayan Applied NLP — My Project
 
-**Learner ID / GitHub username:** FILL_ME  
-**GitHub:** FILL_ME  
-**Final release:** FILL_ME
+# معالجة اللغات الطبيعية التطبيقية — مشروع بيان
 
-## Executive summary | الملخص
+**Student:** Abdulmajeed Mansour Bin Mosained · **GitHub:** [AbdulmajeedAlmosained](https://github.com/AbdulmajeedAlmosained)
+**Program:** SDAIA Academy · `SDA-AIE-211` · Level: Specialist
+**Environment:** Google Colab (Free) + GitHub — no paid tools used
+**Course trainer:** Meaad Al-Marri — credit for the course design and materials goes to her; the runs and evidence in this repo are mine.
 
-FILL_ME: فقرة قصيرة تشرح المشكلة والمستخدم والنتيجة والحدود. اذكر صراحة أن البيانات تعليمية اصطناعية/عامة وليست بيانات مستفيدين حقيقية.
+---
 
-## What Bayan does | ماذا يفعل بيان؟
+## What this project is
 
-1. FILL_ME: privacy/preprocessing.
-2. FILL_ME: topic and sentiment classification.
-3. FILL_ME: NER.
-4. FILL_ME: extractive QA/no-answer.
-5. FILL_ME: bilingual semantic search.
-6. FILL_ME: evaluation and serving.
+**Bayan** is a bilingual (Arabic/English) NLP system I built over a 4-day applied course. It takes text from the Saudi government-services domain and pushes it through the full modern NLP pipeline:
 
-## Scope and non-goals | النطاق وما لا يدعيه المشروع
+1. **Text processing & tokenization** — cleaning, PII masking, Unicode handling for Arabic, and comparing tokenizers (local WordPiece vs multilingual BERT).
+2. **Attention & transformers** — implementing scaled dot-product attention from scratch in NumPy, then inspecting real attention weights inside a pretrained model.
+3. **Text classification** — fine-tuning DistilBERT on a bilingual topic-classification task, compared honestly against a TF-IDF baseline.
+4. **NER & extractive QA** — token classification with BIO alignment and strict entity-boundary scoring, plus span extraction with an honest "no answer in context" option.
+5. **Arabic NLP** — a documented normalization profile built with CAMeL Tools (diacritics, tatweel, alef folding), verified against golden test cases.
+6. **Semantic search** — sentence embeddings + FAISS index over a bilingual case-resolution corpus, with a cross-encoder reranker and a measured latency/quality trade-off.
+7. **Evaluation & error analysis** — bootstrap confidence intervals, sliced metrics, manual error taxonomy, and ranked fixes instead of vague claims.
+8. **Optimization & serving** — ONNX export + dynamic INT8 quantization, measured against a written performance budget, wrapped in a tested FastAPI service with canary checks.
 
-- In scope: FILL_ME
-- Out of scope: FILL_ME
-- Not for: production/government decisions without further validation — FILL_ME
+Every result in this repo is labeled what it is: `MEASURED_SMOKE` on small synthetic course data — not a production-quality claim.
 
-## Reproduce on Google Colab Free
+## How the repo is organized
 
-| # | Notebook | Colab | Purpose |
-|---:|---|---|---|
-| 00 | runtime doctor | FILL_ME | environment |
-| 01 | text processing/tokenisation | FILL_ME | Gate A |
-| 02 | attention/transformers | FILL_ME | LO2 |
-| 03 | classification | FILL_ME | Gate B |
-| 04 | NER and QA | FILL_ME | Gate B |
-| 05 | Arabic NLP | FILL_ME | Gate C |
-| 06 | semantic search | FILL_ME | Gate C |
-| 07 | evaluation/error analysis | FILL_ME | Gate C |
-| 08 | optimisation/serving | FILL_ME | Gate D |
+I work in **one merged notebook** that contains all nine course notebooks as sections, run top-to-bottom in a single Colab session:
 
-Clean-run instructions:
+- [`Bayan_nlp_Abdulmajeed_Mansour_Bin_Mosained.ipynb`](Bayan_nlp_Abdulmajeed_Mansour_Bin_Mosained.ipynb) — the full run: Day 1 → Day 4 in one file
 
-1. Open notebook 00 and choose **Save a copy in Drive**.
-2. Run in numeric order using Colab Free.
-3. Use **Runtime → Restart session and run all** before final evidence.
-4. Do not place tokens, PII, model weights, or private Drive links in the repository.
+The nine official notebooks also live in [`notebooks/`](notebooks) (unmodified course names) so the automated submission checker can find them:
 
-## Architecture
+| # | Notebook | What it proves |
+| --- | --- | --- |
+| 00 | [runtime_doctor](notebooks/00_runtime_doctor.ipynb) | Environment readiness (`BAYAN_ENV_READY = True`) |
+| 01 | [text_processing_tokenization](notebooks/01_text_processing_tokenization.ipynb) | `DAY1_NOTEBOOK1_CORE=PASS` |
+| 02 | [attention_transformers](notebooks/02_attention_transformers.ipynb) | `DAY1_NOTEBOOK2_CORE=PASS` |
+| 03 | [text_classification](notebooks/03_text_classification.ipynb) | `DAY2_NOTEBOOK3_CORE=PASS` |
+| 04 | [ner_and_qa](notebooks/04_ner_and_qa.ipynb) | `DAY2_NOTEBOOK4_CORE=PASS` |
+| 05 | [arabic_nlp](notebooks/05_arabic_nlp.ipynb) | `DAY3_NOTEBOOK5_CORE=PASS` |
+| 06 | [semantic_search](notebooks/06_semantic_search.ipynb) | `DAY3_NOTEBOOK6_CORE=PASS` |
+| 07 | [evaluation_error_analysis](notebooks/07_evaluation_error_analysis.ipynb) | `DAY3_NOTEBOOK7_CORE=PASS` |
+| 08 | [optimization_serving](notebooks/08_optimization_serving.ipynb) | `DAY4_NOTEBOOK8_CORE=PASS` |
 
-```mermaid
-flowchart LR
-    A["AR/EN feedback"] --> B["Privacy + preprocessing"]
-    B --> C["Classification / NER / QA"]
-    B --> D["Embeddings + FAISS"]
-    C --> E["Versioned response"]
-    D --> E
-    E --> F["Evaluation + tested API"]
-```
+Everything else (`src/`, `tests/`, `scripts/`, reports, and the required documents) comes from the official student starter package and is filled in by me.
 
-## Results | النتائج
+## Reproduce my run
 
-كل رقم يحمل `MEASURED`, `MEASURED_SMOKE`, `SYSTEMS_SMOKE`, `TARGET`, أو `REFERENCE`.
+1. Open the merged notebook in Google Colab.
+2. **Runtime → Restart session and run all** (cells must run in order; a failed cell is never skipped).
+3. Each section ends with its own check — look for `DAYx_NOTEBOOKx_CORE=PASS`.
+4. Model weights and ONNX artifacts stay in `/content` (Colab) and are **not** committed — only their SHA-256 hashes, recorded in `reports/`.
 
-| Component | Metric | Result + label | Split/workload | Evidence |
-|---|---|---:|---|---|
-| topic classification | Macro-F1 | FILL_ME | FILL_ME | FILL_ME |
-| sentiment classification | Macro-F1 | FILL_ME | FILL_ME | FILL_ME |
-| NER | entity F1 | FILL_ME | FILL_ME | FILL_ME |
-| QA | EM/F1/no-answer | FILL_ME | FILL_ME | FILL_ME |
-| search | Recall@k/MRR | FILL_ME | FILL_ME | FILL_ME |
-| serving | p95/throughput/quality tax | FILL_ME | FILL_ME | `BENCHMARKS.md` |
+Note: on a fresh Colab runtime I reinstall one inconsistent-by-default package first —
+`%pip install --force-reinstall --no-cache-dir --quiet scikit-learn==1.9.0` — then run all.
 
-## Error found and decision | خطأ وقرار
+## Evidence & reports
 
-- Observed failure: FILL_ME
-- Slice/taxonomy: FILL_ME
-- Fix or deferred action: FILL_ME
-- Evidence after change: FILL_ME
+Generated by my runs and committed here:
 
-## Measured extension | الامتداد المقاس
+- `day2_classification_metrics.json`, `day2_ner_qa_metrics.json`, `bayan_arabic_profile.json`, `runtime_report.json`
+- `reports/` — model comparison, search manifest, retrieval metrics, slice report, error taxonomy, benchmark results, service smoke, validation report
 
-- Extension chosen: FILL_ME
-- Baseline: FILL_ME
-- Benefit/cost metric: FILL_ME
-- Evidence path: FILL_ME
-- Decision and limitation: FILL_ME
+## Honesty & privacy
 
-## Repository evidence
+- All data is the course's synthetic bilingual fixture — no real user data.
+- PII patterns (emails, Saudi mobile numbers) are masked inside the pipeline.
+- Small datasets mean wide confidence intervals; I report them instead of hiding them.
 
-- `DATA_CARD.md`
-- `MODEL_CARD.md`
-- `EVALUATION_REPORT.md`
-- `BENCHMARKS.md`
-- `DECISIONS.md`
-- `PROGRESS.md`
-- `PROJECT_SUMMARY.json`
-- `SUBMISSION.yml`
+## Submission
 
-## Limitations and responsible use
-
-- Data limitation: FILL_ME
-- Arabic/dialect/Arabizi limitation: FILL_ME
-- Task/model limitation: FILL_ME
-- Evaluation uncertainty: FILL_ME
-- Serving/security limitation: FILL_ME
-- Human review requirement: FILL_ME
-
-## Final validation
-
-```bash
-PYTHONPATH=src python scripts/validate_submission.py . --require-tag
-PYTHONPATH=src python scripts/preflight_submission.py . --require-tag
-```
-
-- Validator status: FILL_ME
-- CI badge/link: FILL_ME
-- Release `submission-v1.0`: FILL_ME
-
-## Presentation | العرض
-
-See `PRESENTATION.md`. FILL_ME: link your own examples and reports.
-
-## My contribution | مساهمتي
-
-- My change and file: FILL_ME
-- Reason and evidence: FILL_ME
-
-## AI assistance | الاستعانة بالأدوات
-
-FILL_ME: tool, assistance, verification and source credits—or honestly state none.
-
-## Training context | السياق التدريبي
-
-This educational project was developed during Applied Natural Language Processing
-with Transformers (SDA-AIE-211) in the SDAIA Academy training context.
-أُنجز هذا المشروع التعليمي ضمن دورة معالجة اللغات الطبيعية باستخدام المحولات
-(SDA-AIE-211) في السياق التدريبي لأكاديمية سدايا.
-
-Academy | الأكاديمية: [SDAIA Academy](https://github.com/SDAIAAcademy)  
-Trainer | المدربة: Meaad Al-Marri — ميعاد المري  
-Course source: https://github.com/almiyead-rgb/bayan-applied-nlp-course  
-#SDAIAAcademy
-
-This attribution does not claim Academy endorsement or ownership of third-party assets.
-لا يدعي هذا النسب اعتماد المشروع أو تملك أصول الأطراف الأخرى.
-
-## Final hand-in acknowledgement | إقرار التسليم النهائي
-
-FILL_ME: confirm you reviewed all requirements and understand this version is graded once, with no edited replacement after hand-in. Final tag: `submission-v1.0`.
-
-## License and acknowledgements
-
-FILL_ME: project code license, dataset/model/library licenses, and source links. Do not imply ownership of third-party models, libraries, or institutional marks.
+Final tag: `submission-v1.0` (to be created) · Validator: pending — will update after running `validate_submission.py`
