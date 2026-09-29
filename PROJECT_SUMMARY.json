@@ -4,8 +4,8 @@
   "languages": ["ar", "en"],
   "tasks": ["classification", "sentiment", "ner", "qa", "semantic_search"],
   "extension": {
-    "name": "Measured cross-encoder reranking trade-off on the bilingual search slice (adopt/reject decided by MRR@3 delta vs added latency)",
-    "evidence": "reports/retrieval_metrics.json field reranking (mrr_at_3_before, mrr_at_3_after, median_rerank_ms, p95_rerank_ms, decision)"
+    "name": "Measured cross-encoder reranking trade-off on the bilingual search slice: baseline MRR@3 vs reranked MRR@3 with median/p95 latency cost and an adopt/reject decision (reports/retrieval_metrics.json field reranking)",
+    "evidence": "reports/retrieval_metrics.json"
   },
   "benchmark_mode": "PROJECT_ARTIFACT",
   "final_tag": "submission-v1.0",
