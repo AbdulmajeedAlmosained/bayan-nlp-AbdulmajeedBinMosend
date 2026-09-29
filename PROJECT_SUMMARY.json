@@ -1,14 +1,14 @@
 {
-  "student_github": "YOUR_USERNAME",
-  "repository_url": "https://github.com/YOUR_USERNAME/bayan-nlp-YOUR_USERNAME",
+  "student_github": "AbdulmajeedAlmosained",
+  "repository_url": "https://github.com/AbdulmajeedAlmosained/bayan-nlp-AbdulmajeedBinMosend",
   "languages": ["ar", "en"],
   "tasks": ["classification", "sentiment", "ner", "qa", "semantic_search"],
   "extension": {
-    "name": "FILL_ME",
-    "evidence": "FILL_ME"
+    "name": "Measured cross-encoder reranking trade-off on the bilingual search slice (adopt/reject decided by MRR@3 delta vs added latency)",
+    "evidence": "reports/retrieval_metrics.json field reranking (mrr_at_3_before, mrr_at_3_after, median_rerank_ms, p95_rerank_ms, decision)"
   },
   "benchmark_mode": "PROJECT_ARTIFACT",
   "final_tag": "submission-v1.0",
-  "privacy_check": false,
-  "tests_passed": false
+  "privacy_check": true,
+  "tests_passed": true
 }
