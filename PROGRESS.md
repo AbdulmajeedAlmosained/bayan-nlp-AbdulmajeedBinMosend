@@ -1,40 +1,13 @@
-# PROGRESS — Bayan Gates A–E
+# Progress Log
 
-**Student GitHub:** FILL_ME  
-**Repository:** FILL_ME  
-**Last updated:** FILL_ME
+| Day | What I did | Evidence (commit / file) |
+|---|---|---|
+| Setup | Created the repo, uploaded the student starter package, completed STUDENT_PROFILE.md | initial commits on main |
+| Day 1 | Ran notebooks 00-02 in one merged Colab session: environment doctor passed (`BAYAN_ENV_READY = True`), built the two-copy text-preprocessing pipeline with PII masking, trained a local WordPiece tokenizer, implemented scaled dot-product attention in NumPy, and inspected real attention weights from a pretrained multilingual model | `Bayan_nlp_Abdulmajeed_Mansour_Bin_Mosained.ipynb` (sections 00-02), `runtime_report.json` |
+| Day 2 | Fine-tuned DistilBERT (mDeBERTa-family checkpoint `distilbert-base-multilingual-cased`) on the bilingual topic-classification fixture and compared it honestly against a TF-IDF + LinearSVC baseline; trained NER (BIO alignment, strict boundary scoring) and extractive QA with an explicit no-answer path | `day2_classification_metrics.json`, `day2_ner_qa_metrics.json` |
+| Day 3 | Built the documented Arabic normalization profile with CAMeL Tools 1.6.0 (search profile: diacritics/tatweel removal, alef folding, PII masking) verified against golden cases; built the bilingual FAISS semantic-search index with a tuned no-answer threshold and a measured cross-encoder reranker trade-off; ran the full evaluation notebook (bootstrap CIs, slices, manual error taxonomy, ranked fixes) | `bayan_arabic_profile.json`, `reports/` |
+| Day 4 | Exported the model to ONNX (FP32 + dynamic INT8), verified numerical parity and prediction agreement, benchmarked against a written performance budget, and served the selected artifact through a FastAPI app with startup canaries and contract tests | `reports/benchmark_results.json`, `reports/service_smoke.json` |
+| Gate D | Re-ran the optimization notebook on my own fine-tuned classifier as `PROJECT_ARTIFACT` (see PROJECT_SUMMARY.json) | final notebook version + updated `reports/` |
 
-لا تضع علامة ✅ قبل وجود رابط commit/report/test قابل للفحص.
-
-| Gate | Status | Required evidence | Commit/report links | Blocker/next action |
-|---|---|---|---|---|
-| A — ingest | ⬜ | preprocessing tests + tokenizer decision | FILL_ME | FILL_ME |
-| B — tasks | ⬜ | classification + NER + QA evidence | FILL_ME | FILL_ME |
-| C — search & truth | ⬜ | search metrics + slices + taxonomy | FILL_ME | FILL_ME |
-| D — ship | ⬜ | project benchmark + API tests + canaries | FILL_ME | FILL_ME |
-| E — submit | ⬜ | validator + demo + release tag | FILL_ME | FILL_ME |
-
-Status values: `⬜ NOT_STARTED`, `🟨 IN_PROGRESS`, `✅ PASSED`, `🟥 BLOCKED`.
-
-## Runtime/run-all evidence
-
-| Notebook | Clean run date | Core marker | Colab/GitHub link |
-|---|---|---|---|
-| 00 | FILL_ME | runtime checks | FILL_ME |
-| 01 | FILL_ME | `DAY1_NOTEBOOK1_CORE=PASS` | FILL_ME |
-| 02 | FILL_ME | `DAY1_NOTEBOOK2_CORE=PASS` | FILL_ME |
-| 03 | FILL_ME | `DAY2_NOTEBOOK3_CORE=PASS` | FILL_ME |
-| 04 | FILL_ME | `DAY2_NOTEBOOK4_CORE=PASS` | FILL_ME |
-| 05 | FILL_ME | `DAY3_NOTEBOOK5_CORE=PASS` | FILL_ME |
-| 06 | FILL_ME | `DAY3_NOTEBOOK6_CORE=PASS` | FILL_ME |
-| 07 | FILL_ME | `DAY3_NOTEBOOK7_CORE=PASS` | FILL_ME |
-| 08 | FILL_ME | `DAY4_NOTEBOOK8_CORE=PASS` | FILL_ME |
-
-## Final release
-
-- Final commit: FILL_ME
-- Release/tag `submission-v1.0`: FILL_ME
-- Validator pre-tag report: FILL_ME
-- Validator `--require-tag` report: FILL_ME
-- Private-window visibility check: PASS / FAIL — FILL_ME
-- Remaining limitation: FILL_ME
+Known issue handled: Colab's preinstalled scikit-learn was internally inconsistent, so I
+force-reinstall `scikit-learn==1.9.0` as the first cell before every full run.
