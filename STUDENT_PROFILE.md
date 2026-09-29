@@ -1,33 +1,12 @@
-# STUDENT PROFILE | ملف المتدرب
+# Student Profile
 
-استخدم المعلومات اللازمة للتقييم فقط. لا تضف رقم هوية أو هاتفًا أو عنوانًا أو token أو بيانات حساسة.
-
-- Display name | الاسم للعرض: FILL_ME
-- GitHub username: FILL_ME
-- Public repository: FILL_ME
-- Learning lane completed: Core / Explore / Distinction — FILL_ME
-- Starting level (self-described): beginner / intermediate / specialist — FILL_ME
-
-## My contribution | مساهمتي
-
-المشروع فردي. اشرح ما بنيته وما تعلمته، واذكر المساعدة أو المصادر وفق سياسة النزاهة.
-
-FILL_ME
-
-## One skill I can now demonstrate
-
-FILL_ME: مهارة واحدة + رابط دليل داخل المستودع.
-
-## One limitation I understand
-
-FILL_ME
-
-## Integrity declaration | إقرار النزاهة
-
-- [ ] أفهم كل كود وقرار أسلمه ويمكنني شرحه.
-- [ ] نسبت المصادر والمكتبات والنماذج والبيانات إلى أصحابها.
-- [ ] لم أستخدم بيانات شخصية أو أسرارًا.
-- [ ] لم أغيّر test labels أو validator للحصول على PASS.
-
-Signature/display name: FILL_ME  
-Date: FILL_ME
+- Name: Abdulmajeed Mansour Bin Mosained
+- GitHub: [AbdulmajeedAlmosained](https://github.com/AbdulmajeedAlmosained)
+- Repository: https://github.com/AbdulmajeedAlmosained/bayan-nlp-AbdulmajeedBinMosend
+- Program: SDAIA Academy — SDA-AIE-211, Applied NLP (Specialist level)
+- Prerequisite met: Python and machine-learning fundamentals (SDA-AIE-112 level)
+- Environment: Google Colab Free (Python 3.13) + GitHub public repo — no paid tools
+- Working style: I run all nine course notebooks as one merged notebook in a single
+  Colab session (Runtime -> Restart session and run all), verify the eight
+  `DAYx_CORE=PASS` markers, then commit the executed notebook and the generated
+  reports to this repository.
