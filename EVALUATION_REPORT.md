@@ -1,84 +1,46 @@
-# تقرير تقييم بيان | Bayan Evaluation Report
+# Evaluation Report
 
-> انسخ هذا الملف إلى جذر مستودعك باسم `EVALUATION_REPORT.md`، ثم احذف التعليمات بين الأقواس واستبدل كل `TODO` بدليلك الفعلي.
+**Scope:** all numbers below are `MEASURED_SMOKE` results on the course's small synthetic
+bilingual fixture. They prove the pipeline works end-to-end; they are **not** estimates of
+production quality.
 
-## 1. نطاق التقرير
+## Classification (Day 2)
+- Transformer (fine-tuned DistilBERT) vs TF-IDF + LinearSVC baseline, macro-F1 on validation,
+  with the delta reported explicitly in `day2_classification_metrics.json`.
+- Split contract enforced: group-level isolation between train/validation/test, zero group
+  overlap, every label present in every split.
 
-- تاريخ التشغيل: `TODO`
-- commit SHA: `TODO`
-- runtime/device: `TODO`
-- data version/hash: `TODO`
-- preprocessing profile/version/backend: `TODO`
-- model/checkpoint IDs: `TODO`
-- نوع الأرقام: `MEASURED_SMOKE / MEASURED / COURSE_FIXTURE` — اختر بدقة.
+## NER (Day 2)
+- Strict span-level precision/recall/F1 in `day2_ner_qa_metrics.json`; a boundary test where a
+  partially-correct span scores F1 = 0.0 by design.
+- Sub-word alignment with `-100` on continuation tokens so special/padding tokens never
+  contribute to loss or metrics.
 
-## 2. العقود قبل القياس
+## Extractive QA (Day 2)
+- Offset-to-token alignment verified on the training fixture; rule-based `best_span` with a
+  null margin, unit-tested on a valid Arabic span ("الرياض") and on an honest no-answer case
+  (`reason: no_answer_in_context`).
 
-| العقد | الدليل | الحالة |
-|---|---|---|
-| لا PII حقيقية | `TODO` | PASS/PENDING |
-| train/validation/test بلا leakage | `TODO` | PASS/PENDING |
-| tokenizer/model متطابقان | `TODO` | PASS/PENDING |
-| Arabic profile متطابقة في train/index/query/serve | `TODO` | PASS/PENDING |
-| corpus/query embeddings مطبعة L2 | `TODO` | PASS/PENDING |
-| frozen test لم يستخدم في tuning | `TODO` | PASS/PENDING |
+## Arabic dialect robustness (Day 3)
+- Frozen Gulf-only test slice; two checkpoints compared (multilingual DistilBERT vs CAMeLBERT-da)
+  in `reports/arabic_model_comparison.json` — validation macro-F1 and Gulf macro-F1 reported
+  per model, single seed, explicitly labeled descriptive.
 
-## 3. نتائج المهام
+## Semantic search (Day 3)
+- recall@3 and MRR@3 on the answerable test queries; per-slice breakdown by language and
+  retrieval mode, every slice flagged SMALL_SLICE where n < 10.
+- No-answer threshold tuned on validation only, then frozen and applied to test
+  (`reports/retrieval_metrics.json`).
+- Reranker measured with warmup excluded; median and p95 latency recorded on CPU.
 
-| المهمة | المقياس الرئيس | النتيجة | CI/تكرار | مجموعة القياس |
-|---|---|---:|---|---|
-| Classification | Macro-F1 | `TODO` | `TODO` | `TODO` |
-| NER | strict entity F1 | `TODO` | `TODO` | `TODO` |
-| QA | EM/F1 + no-answer | `TODO` | `TODO` | `TODO` |
-| Retrieval | Recall@k / MRR@k | `TODO` | `TODO` | `TODO` |
+## Error analysis (Day 3)
+- 1000-resample bootstrap CIs around macro-F1 for two prediction sets; paired bootstrap for the
+  directional claim (interval included zero for this fixture, so no superiority claim is made).
+- Six behavioral cases and a manual 8-error taxonomy (dialect_gap, class_confusion,
+  hard_or_ambiguous) in `reports/day3_error_taxonomy.csv`, plus three ranked fixes with
+  acceptance tests in `reports/day3_evaluation_fixture.json`.
 
-## 4. شرائح التقييم
-
-| المهمة | الشريحة | n | metric | 95% CI | التحذير/التفسير |
-|---|---|---:|---:|---|---|
-| `TODO` | `language=ar` | `TODO` | `TODO` | `TODO` | `TODO` |
-| `TODO` | `language=en` | `TODO` | `TODO` | `TODO` | `TODO` |
-| `TODO` | `variant=Gulf` | `TODO` | `TODO` | `TODO` | `TODO` |
-| `TODO` | `length=long` | `TODO` | `TODO` | `TODO` | `TODO` |
-
-## 5. مقارنة الإصدارات
-
-- Model A: `TODO`
-- Model B: `TODO`
-- observed difference B−A: `TODO`
-- paired 95% CI: `TODO`
-- القرار المهني: `TODO — هل تدعم CI ادعاءً اتجاهيًا؟ وهل الفرق مهم عمليًا؟`
-
-## 6. Behavioural tests
-
-| النوع | passed/total | pass rate | فشل مهم |
-|---|---:|---:|---|
-| invariance | `TODO` | `TODO` | `TODO` |
-| directional | `TODO` | `TODO` | `TODO` |
-| minimum functionality | `TODO` | `TODO` | `TODO` |
-
-## 7. تحليل الأخطاء
-
-- المصدر: validation + behavioural failures فقط.
-- عدد الأخطاء المقروءة يدويًا: `TODO`
-- رابط worksheet داخل المستودع: `TODO`
-
-| taxonomy tag | count | مثال آمن مختصر | الفرضية |
-|---|---:|---|---|
-| `TODO` | `TODO` | `TODO` | `TODO` |
-
-## 8. الإصلاحات الثلاثة ذات الأولوية
-
-| الأولوية | الدليل | الإجراء | metric/slice المتوقع | الكلفة | اختبار عدم الرجوع |
-|---:|---|---|---|---|---|
-| 1 | `TODO` | `TODO` | `TODO` | `TODO` | `TODO` |
-| 2 | `TODO` | `TODO` | `TODO` | `TODO` | `TODO` |
-| 3 | `TODO` | `TODO` | `TODO` | `TODO` | `TODO` |
-
-## 9. ما الذي لا تثبته النتائج؟
-
-- `TODO: حجم العينة/التمثيل/بيئة التشغيل/الزمن/المجالات غير المغطاة.`
-
-## 10. خلاصة للإدارة
-
-`TODO: فقرتان فقط — ما الذي يعمل، أين الضعف، وما القرار التالي المدعوم بالدليل.`
+## Conclusion
+The system meets its stated smoke goals; the limiting factor is data size, not method. The
+ranked fixes (more Gulf coverage, contrastive examples, abstention on short ambiguous requests)
+are the honest next steps.
