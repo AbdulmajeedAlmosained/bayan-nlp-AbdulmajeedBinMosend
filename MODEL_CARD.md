@@ -1,57 +1,33 @@
-# بطاقة نموذج بيان | Bayan Model Card
+# Model Card — Bayan NLP
 
-> انسخها باسم `MODEL_CARD.md` وكرر الأقسام التالية لكل artefact (topic، sentiment، NER، QA، embeddings/reranker). يجوز فصلها إلى ملفات متعددة بشرط أن يربط بها `MODEL_CARD.md`. لا تُدمج مقاييس checkpoints مختلفة في صف واحد.
+## Primary artifact (Gate D)
+- Base checkpoint: `distilbert/distilbert-base-multilingual-cased` (pretrained, weights downloaded
+  from Hugging Face at run time; no API key required).
+- Adaptation: sequence-classification head fine-tuned on the course's bilingual ar/en topic
+  fixture (4 topics; training mode recorded per device: full fine-tune on GPU, last-block + head
+  on CPU).
+- Output: one of {digital_service, permit, health, transport} with softmax confidence.
 
-## Model details
-
-- Name/version: `TODO`
-- Base checkpoint: `TODO`
-- Task: `TODO`
-- License/source: `TODO`
-- Commit SHA: `TODO`
-- Owner/contact role: `TODO — لا تضع بيانات شخصية غير لازمة`
+## Supporting models used in the pipeline
+- `google-bert/bert-base-multilingual-cased` — tokenizer reference and parameter audit.
+- `CAMeL-Lab/bert-base-arabic-camelbert-da` — Arabic comparison candidate (Day 3).
+- `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` — retrieval bi-encoder.
+- `cross-encoder/mmarco-mMiniLMv2-L12-H384-v1` — reranker.
 
 ## Intended use
-
-- الاستخدام المقصود: `TODO`
-- المستخدمون المقصودون: `TODO`
-- خارج النطاق: `TODO`
-
-## Data and preprocessing
-
-- Dataset ID/version: `TODO`
-- Languages/variants: `TODO`
-- Split strategy: `TODO`
-- PII policy: `TODO`
-- Preprocessing profile/version/backend: `TODO`
-- Tokenizer/embedding model: `TODO`
+Educational bilingual text classification / retrieval over Saudi government-services topics.
+Not for production decisions; smoke-scale training data only.
 
 ## Evaluation
+See EVALUATION_REPORT.md and the JSON artifacts in `reports/` — every number is labeled
+`MEASURED_SMOKE` with its limitations listed inline.
 
-| metric/slice | n | result | uncertainty | evidence file |
-|---|---:|---:|---|---|
-| `TODO` | `TODO` | `TODO` | `TODO` | `TODO` |
+## Privacy & safety
+- Synthetic course data only; no real user data anywhere in the repo.
+- PII patterns (emails, Saudi mobile numbers) are masked to `<EMAIL>` / `<PHONE>` inside the
+  model-facing text; the raw display copy is preserved separately and never leaves the pipeline.
+- No secrets, tokens, or credentials are stored in this repository.
 
-## Behavioural checks
-
-| capability | pass rate | known failure |
-|---|---:|---|
-| `TODO` | `TODO` | `TODO` |
-
-## Limitations and risks
-
-1. `TODO`
-2. `TODO`
-3. `TODO`
-
-## Ethical and privacy notes
-
-- `TODO: synthetic/public data only; masking scope; no production claim.`
-
-## Reproduction
-
-1. افتح notebook: `TODO`.
-2. استخدم runtime/device: `TODO`.
-3. ثبت النسخ: `TODO`.
-4. شغّل Run all من commit: `TODO`.
-5. قارن النتيجة مع: `TODO`.
+## Rollback
+Re-export ONNX from the recorded model source; model weights are kept outside GitHub
+(hashes recorded in `reports/benchmark_results.json`).
